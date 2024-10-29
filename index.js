@@ -9,7 +9,7 @@ const server = http.createServer(app)
 server.listen(port)
 
 server.on('listening', () => {
-    console.log(`Server listening on http://localhost${port}`)
+    console.log(`Server listening on http://localhost:${port}`)
 })
 
 server.on('error', err => {
