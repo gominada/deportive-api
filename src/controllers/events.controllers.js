@@ -1,10 +1,17 @@
 const { Event } = require("../models/events.models")
 
-exports.testing = (req, res, next) => {
-    console.log(req.url, "😝")
-}
-
 exports.getAll = async (req, res, next) => {
+    const { type } = req.query
+
+    if (type) {
+        try {
+            const events = await Event.find({ "type": type })
+            return res.json(events)
+        } catch (err) {
+            next(err)
+        }
+    }
+
     try {
         const events = await Event.find()
         res.json(events)
