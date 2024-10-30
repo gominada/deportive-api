@@ -4,6 +4,6 @@ const app = express()
 
 app.use(express.json())
 
-app.use('/apis', require('./routes/api.routes'))
+app.use('/api', require('./routes/api.routes'))
 
 module.exports = app

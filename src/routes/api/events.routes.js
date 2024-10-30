@@ -1,15 +1,16 @@
+const { testing } = require('../../controllers/events.controllers')
+
 const router = require('express').Router()
 
-router.get('',)
-router.get('/',)
-router.get('/date')
-router.get('/upcoming')
-router.get('/:eventId',)
+router.get('/', testing)
+router.get('/date', testing)
+router.get('/upcoming', testing)
+router.get('/:eventId', testing)
 
-router.post('/',)
+router.post('/', testing)
 
-router.put('/:eventId',)
+router.put('/:eventId', testing)
 
-router.delete('/:eventId',)
+router.delete('/:eventId', testing)
 
 module.exports = router
