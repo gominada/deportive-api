@@ -35,6 +35,8 @@ exports.createEvent = async (req, res, next) => {
         const event = await Event.create(req.body)
         res.status(201).json(event)
     } catch (err) {
+        if (err.name === 'ValidationError')
+            return res.status(400).json({ message: "Invalid body data" })
         next(err)
     }
 }

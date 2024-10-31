@@ -8,6 +8,8 @@ exports.register = async (req, res, next) => {
         const user = await User.create(req.body)
         res.status(201).json(user)
     } catch (err) {
+        if (err.name === 'ValidationError')
+            return res.status(400).json({ message: "Invalid body data" })
         next(err)
     }
 }
