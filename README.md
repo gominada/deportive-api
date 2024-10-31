@@ -76,12 +76,12 @@ The added event object.
   - Content-type: application/json
   - Authorization: `auth-token`
 - **Body**
-   - `name` optinal - String, the name of the event.
-   - `description` optinal - Sttring, a description of the event.
-   - `date` optinal - Date, in the format 'YYYY-MM-DDD'.
-   - `location` optinal - String, the location of the event.
-   - `sportType` optinal - String, the type of the event.
-   - `organizer` optinal - String, the name of the organizer.
+   - `name` optional - String, the name of the event.
+   - `description` optional - Sttring, a description of the event.
+   - `date` optional - Date, in the format 'YYYY-MM-DDD'.
+   - `location` optional - String, the location of the event.
+   - `sportType` optional - String, the type of the event.
+   - `organizer` optional - String, the name of the organizer.
 
 
 The modified event object.
