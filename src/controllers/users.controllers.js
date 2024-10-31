@@ -5,7 +5,6 @@ const { createToken } = require('../utils/helper')
 exports.register = async (req, res, next) => {
     try {
         req.body.password = await bcrypt.hash(req.body.password, 10)
-        console.log(req.body)
         const user = await User.create(req.body)
         res.status(201).json(user)
     } catch (err) {
@@ -39,6 +38,6 @@ exports.login = async (req, res, next) => {
 }
 
 exports.getProfile = (req, res, next) => {
-
+    res.json(req.user)
 }
 
