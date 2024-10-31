@@ -24,6 +24,13 @@ exports.getById = async (req, res, next) => {
     const { eventId } = req.params
     try {
         const event = await Event.findById(eventId)
+
+        if (!event) {
+            return res
+                .status(404)
+                .json({ message: "The item with the provided ID does not exist" })
+        }
+
         res.json(event)
     } catch (err) {
         next(err)
@@ -46,6 +53,13 @@ exports.updateEvent = async (req, res, next) => {
     try {
         const event = await Event.findByIdAndUpdate(eventId, req.body, { new: true })
         res.json(event)
+
+        if (!event) {
+            return res
+                .status(404)
+                .json({ message: "The item with the provided ID does not exist" })
+        }
+
     } catch (err) {
         next(err)
     }
@@ -72,10 +86,17 @@ exports.getAllSortedByDate = async (req, res, next) => {
 
 exports.getByDate = async (req, res, next) => {
     const { from, to } = req.query
+
+    if (!from || !to) {
+        return res.status(400).json({ message: "Invalid parameters" })
+    }
+
     try {
         const events = await Event.find({ date: { $gte: from, $lte: to } })
         res.json(events)
     } catch (err) {
+        if (err.name === 'CastError')
+            return res.status(400).json({ message: "Invalid parameters format" })
         next(err)
     }
 }

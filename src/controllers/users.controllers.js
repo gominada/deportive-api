@@ -3,23 +3,32 @@ const { User } = require("../models/users.models")
 const { createToken } = require('../utils/helper')
 
 exports.register = async (req, res, next) => {
+
     try {
         req.body.password = await bcrypt.hash(req.body.password, 10)
         const user = await User.create(req.body)
         res.status(201).json(user)
+
     } catch (err) {
         if (err.name === 'ValidationError')
             return res.status(400).json({ message: "Invalid body data" })
+
+        if (err.code === 11000)
+            return res.status(409).json({ message: "An account with this usenrame already exists" })
+
         next(err)
     }
 }
 
 
 exports.login = async (req, res, next) => {
-    const { name, password } = req.body
+    const { username, password } = req.body
+
+    if (typeof password != 'string')
+        return res.status(400).json({ message: "Invalid body data" })
 
     try {
-        const user = await User.findOne({ name })
+        const user = await User.findOne({ username })
         if (!user) {
             return res.status(401).json({ message: 'Incorrect email/password' })
         }
