@@ -14,7 +14,7 @@ exports.register = async (req, res, next) => {
             return res.status(400).json({ message: "Invalid body data" })
 
         if (err.code === 11000)
-            return res.status(409).json({ message: "An account with this usenrame already exists" })
+            return res.status(409).json({ message: "An account with this username already exists" })
 
         next(err)
     }
